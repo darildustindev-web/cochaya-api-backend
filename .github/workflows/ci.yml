@@ -1,0 +1,33 @@
+name: Node.js CI (Integración Continua)
+
+# ¿Cuándo se ejecutará esto? Cada vez que subas código a 'main'
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    # El servidor en la nube que usará GitHub
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Descarga tu código al servidor de GitHub
+    - name: Checkout del repositorio
+      uses: actions/checkout@v4
+
+    # 2. Instala Node.js v22
+    - name: Configurar Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+        cache: 'npm'
+
+    # 3. Instala las dependencias para comprobar que no hay errores
+    - name: Instalar dependencias limpias
+      run: npm ci
+
+    # 4. Comprobación de sintaxis básica del servidor
+    - name: Comprobar arranque (Health Check)
+      run: node --check index.js
