@@ -34,8 +34,9 @@ cochaya-backend/
 │   └── product.routes.js     
 ├── index.js                  # Entry point and Express server setup
 └── package.json
+```
 
-🚀 Installation & Setup
+## 🚀 Installation & Setup
 
     Clone the repository:
     Bash
